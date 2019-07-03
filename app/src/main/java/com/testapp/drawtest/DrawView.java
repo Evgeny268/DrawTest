@@ -1,17 +1,10 @@
 package com.testapp.drawtest;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.MainThread;
-import android.text.TextPaint;
-import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 
 public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
@@ -22,12 +15,19 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
     {
         super(context);
 
+        getHolder().addCallback(this);
 
+        thread = new MainThread(getHolder(),this);
+
+        setFocusable(true);
     }
 
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        thread = new MainThread(getHolder(), this);
+        thread.setRunning(true);
+        thread.start();
 
     }
 
@@ -38,6 +38,28 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        boolean retry = true;
+        while (true) {
+            try {
+                thread.setRunning(false);
+                thread.join();
+            } catch (Exception e) {e.printStackTrace();}
+            retry = false;
+        }
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    public void update () {
+
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
     }
 }
