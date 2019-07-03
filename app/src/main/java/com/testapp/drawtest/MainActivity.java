@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         drawView = findViewById(R.id.drawView);
         setContentView(R.layout.activity_main);
-        drawView.invalidate();
+        //drawView.invalidate();
         //setContentView(new DrawView(this));
     }
 
