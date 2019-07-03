@@ -13,7 +13,7 @@ public class MainThread extends Thread {
 
     public  void setRunning (boolean Running)
     {
-        this.running = running;
+        this.running = Running;
     }
 
     public MainThread (SurfaceHolder surfaceHolder, DrawView DrawView) {
