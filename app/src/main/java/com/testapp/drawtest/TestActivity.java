@@ -34,6 +34,7 @@ public class TestActivity extends AppCompatActivity implements View.OnTouchListe
             float x = event.getX();
             float y = event.getY();
             int []coord = gameSurfaceView.getCellXY(x,y);
+            //if (coord[0]>=fieldSize || coord[1]>=fieldSize) return false;
             textView.setText(String.valueOf(coord[1])+":"+String.valueOf(coord[0]));
             gameSurfaceView.drawOrigin();
             gameSurfaceView.setCell(coord[0],coord[1], GameSurfaceView.CellType.CIRCLE,Color.GREEN,80);
