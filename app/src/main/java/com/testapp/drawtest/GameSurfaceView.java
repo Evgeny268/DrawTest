@@ -92,8 +92,8 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         } else maxSize = this.getHeight();
         float stepSize = maxSize / (float) fieldSize;
         int []out = new int[2];
-        out[0] = (int)(x/stepSize);
-        out[1] = (int)(y/stepSize);
+        out[0] = (int)(x/stepSize)>=fieldSize ? fieldSize-1 : (int)(x/stepSize);
+        out[1] = (int)(y/stepSize)>=fieldSize ? fieldSize-1 : (int)(y/stepSize);
         return out;
     }
 
