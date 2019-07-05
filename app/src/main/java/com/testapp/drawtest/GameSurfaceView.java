@@ -15,9 +15,10 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     private SurfaceHolder surfaceHolder = null;
     private int backColor = Color.WHITE; //Цвет всей области рисования
     private int fieldColor = Color.WHITE; //Цвет поля
+    private int gridColor = Color.BLACK; //Цвет сетки
     private boolean showGrid = true; //Отображать сетку
     private int gridStroke = 1; //Толщина линий сетки
-    private int fieldSize = 9; //Кол-во ячеек в строке и столбце
+    private int fieldSize = 1; //Кол-во ячеек в строке и столбце
 
     public enum CellType{
         SQUARE,
@@ -140,6 +141,14 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         this.backColor = backColor;
     }
 
+    public int getGridColor() {
+        return gridColor;
+    }
+
+    public void setGridColor(int gridColor) {
+        this.gridColor = gridColor;
+    }
+
     //Первоначальные настройки
     public void drawOrigin(){
         Canvas canvas = surfaceHolder.lockCanvas();
@@ -174,7 +183,7 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             return;
         }
         Paint surfaceBackground = new Paint();
-        surfaceBackground.setColor(Color.BLACK);
+        surfaceBackground.setColor(gridColor);
         surfaceBackground.setStrokeWidth(gridStroke);
         if (this.getWidth()<this.getHeight()){
             maxSize = this.getWidth();
